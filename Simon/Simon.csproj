@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{78b5e93c-0675-464b-856f-62b011870a0b}</ProjectGuid>
+    <ProjectGuid>{78B5E93C-0675-464B-856F-62B011870A0B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Simon</RootNamespace>
@@ -16,9 +16,7 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    
     <PackageCertificateKeyFile>Simon_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -92,49 +90,267 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomTriggers\OrientationTrigger.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundUri.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
     <None Include="Simon_TemporaryKey.pfx" />
-    
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Credits\Read.txt" />
+    <Content Include="Assets\cyhz1zff.bmp" />
+    <Content Include="Assets\s0k6ayi3.bmp" />
+    <Content Include="Assets\scale-100\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\scale-100\Square310x310Logo.scale-100.png" />
+    <Content Include="Assets\Square310x310Logo.scale-125.png" />
+    <Content Include="Assets\Square310x310Logo.scale-150.png" />
+    <Content Include="Assets\Square310x310Logo.scale-200.png" />
+    <Content Include="Assets\Square310x310Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\scale-100\center_left_frosted_default.png" />
+    <Content Include="Assets\scale-100\center_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-100\center_right_frosted_default.png" />
+    <Content Include="Assets\scale-100\center_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-100\lower_left_frosted_default.png" />
+    <Content Include="Assets\scale-100\lower_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-100\lower_right_frosted_default.png" />
+    <Content Include="Assets\scale-100\lower_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-100\upper_left_frosted_default.png" />
+    <Content Include="Assets\scale-100\upper_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-100\upper_right_frosted_default.png" />
+    <Content Include="Assets\scale-100\upper_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-140\center_left_frosted_default.png" />
+    <Content Include="Assets\scale-140\center_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-140\center_right_frosted_default.png" />
+    <Content Include="Assets\scale-140\center_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-140\lower_left_frosted_default.png" />
+    <Content Include="Assets\scale-140\lower_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-140\lower_right_frosted_default.png" />
+    <Content Include="Assets\scale-140\lower_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-140\upper_left_frosted_default.png" />
+    <Content Include="Assets\scale-140\upper_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-140\upper_right_frosted_default.png" />
+    <Content Include="Assets\scale-140\upper_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-180\center_left_frosted_default.png" />
+    <Content Include="Assets\scale-180\center_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-180\center_right_frosted_default.png" />
+    <Content Include="Assets\scale-180\center_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-180\lower_left_frosted_default.png" />
+    <Content Include="Assets\scale-180\lower_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-180\lower_right_frosted_default.png" />
+    <Content Include="Assets\scale-180\lower_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-180\upper_left_frosted_default.png" />
+    <Content Include="Assets\scale-180\upper_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-180\upper_right_frosted_default.png" />
+    <Content Include="Assets\scale-180\upper_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-240\center_left_frosted_default.png" />
+    <Content Include="Assets\scale-240\center_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-240\center_right_frosted_default.png" />
+    <Content Include="Assets\scale-240\center_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-240\lower_left_frosted_default.png" />
+    <Content Include="Assets\scale-240\lower_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-240\lower_right_frosted_default.png" />
+    <Content Include="Assets\scale-240\lower_right_frosted_pressed.png" />
+    <Content Include="Assets\scale-240\upper_left_frosted_default.png" />
+    <Content Include="Assets\scale-240\upper_left_frosted_pressed.png" />
+    <Content Include="Assets\scale-240\upper_right_frosted_default.png" />
+    <Content Include="Assets\scale-240\upper_right_frosted_pressed.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Square71x71Logo.scale-100.png" />
+    <Content Include="Assets\Square71x71Logo.scale-125.png" />
+    <Content Include="Assets\Square71x71Logo.scale-150.png" />
+    <Content Include="Assets\Square71x71Logo.scale-200.png" />
+    <Content Include="Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Images\scale-100\Flat\Normal\Blue.png" />
+    <Content Include="Images\scale-100\Flat\Normal\Green.png" />
+    <Content Include="Images\scale-100\Flat\Normal\Orange.png" />
+    <Content Include="Images\scale-100\Flat\Normal\Purple.png" />
+    <Content Include="Images\scale-100\Flat\Normal\Red.png" />
+    <Content Include="Images\scale-100\Flat\Normal\Yellow.png" />
+    <Content Include="Images\scale-100\Flat\Pressed\Blue.png" />
+    <Content Include="Images\scale-100\Flat\Pressed\Green.png" />
+    <Content Include="Images\scale-100\Flat\Pressed\Orange.png" />
+    <Content Include="Images\scale-100\Flat\Pressed\Purple.png" />
+    <Content Include="Images\scale-100\Flat\Pressed\Red.png" />
+    <Content Include="Images\scale-100\Flat\Pressed\Yellow.png" />
+    <Content Include="Images\scale-100\Raised\Normal\Blue.png" />
+    <Content Include="Images\scale-100\Raised\Normal\Green.png" />
+    <Content Include="Images\scale-100\Raised\Normal\Orange.png" />
+    <Content Include="Images\scale-100\Raised\Normal\Purple.png" />
+    <Content Include="Images\scale-100\Raised\Normal\Red.png" />
+    <Content Include="Images\scale-100\Raised\Normal\Yellow.png" />
+    <Content Include="Images\scale-100\Raised\Pressed\Blue.png" />
+    <Content Include="Images\scale-100\Raised\Pressed\Green.png" />
+    <Content Include="Images\scale-100\Raised\Pressed\Orange.png" />
+    <Content Include="Images\scale-100\Raised\Pressed\Purple.png" />
+    <Content Include="Images\scale-100\Raised\Pressed\Red.png" />
+    <Content Include="Images\scale-100\Raised\Pressed\Yellow.png" />
+    <Content Include="Images\scale-140\Flat\Normal\Blue.png" />
+    <Content Include="Images\scale-140\Flat\Normal\Green.png" />
+    <Content Include="Images\scale-140\Flat\Normal\Orange.png" />
+    <Content Include="Images\scale-140\Flat\Normal\Purple.png" />
+    <Content Include="Images\scale-140\Flat\Normal\Red.png" />
+    <Content Include="Images\scale-140\Flat\Normal\Yellow.png" />
+    <Content Include="Images\scale-140\Flat\Pressed\Blue.png" />
+    <Content Include="Images\scale-140\Flat\Pressed\Green.png" />
+    <Content Include="Images\scale-140\Flat\Pressed\Orange.png" />
+    <Content Include="Images\scale-140\Flat\Pressed\Purple.png" />
+    <Content Include="Images\scale-140\Flat\Pressed\Red.png" />
+    <Content Include="Images\scale-140\Flat\Pressed\Yellow.png" />
+    <Content Include="Images\scale-140\Raised\Normal\Blue.png" />
+    <Content Include="Images\scale-140\Raised\Normal\Green.png" />
+    <Content Include="Images\scale-140\Raised\Normal\Orange.png" />
+    <Content Include="Images\scale-140\Raised\Normal\Purple.png" />
+    <Content Include="Images\scale-140\Raised\Normal\Red.png" />
+    <Content Include="Images\scale-140\Raised\Normal\Yellow.png" />
+    <Content Include="Images\scale-140\Raised\Pressed\Blue.png" />
+    <Content Include="Images\scale-140\Raised\Pressed\Green.png" />
+    <Content Include="Images\scale-140\Raised\Pressed\Orange.png" />
+    <Content Include="Images\scale-140\Raised\Pressed\Purple.png" />
+    <Content Include="Images\scale-140\Raised\Pressed\Red.png" />
+    <Content Include="Images\scale-140\Raised\Pressed\Yellow.png" />
+    <Content Include="Images\scale-180\Flat\Normal\Blue.png" />
+    <Content Include="Images\scale-180\Flat\Normal\Green.png" />
+    <Content Include="Images\scale-180\Flat\Normal\Orange.png" />
+    <Content Include="Images\scale-180\Flat\Normal\Purple.png" />
+    <Content Include="Images\scale-180\Flat\Normal\Red.png" />
+    <Content Include="Images\scale-180\Flat\Normal\Yellow.png" />
+    <Content Include="Images\scale-180\Flat\Pressed\Blue.png" />
+    <Content Include="Images\scale-180\Flat\Pressed\Green.png" />
+    <Content Include="Images\scale-180\Flat\Pressed\Orange.png" />
+    <Content Include="Images\scale-180\Flat\Pressed\Purple.png" />
+    <Content Include="Images\scale-180\Flat\Pressed\Red.png" />
+    <Content Include="Images\scale-180\Flat\Pressed\Yellow.png" />
+    <Content Include="Images\scale-180\Raised\Normal\Blue.png" />
+    <Content Include="Images\scale-180\Raised\Normal\Green.png" />
+    <Content Include="Images\scale-180\Raised\Normal\Orange.png" />
+    <Content Include="Images\scale-180\Raised\Normal\Purple.png" />
+    <Content Include="Images\scale-180\Raised\Normal\Red.png" />
+    <Content Include="Images\scale-180\Raised\Normal\Yellow.png" />
+    <Content Include="Images\scale-180\Raised\Pressed\Blue.png" />
+    <Content Include="Images\scale-180\Raised\Pressed\Green.png" />
+    <Content Include="Images\scale-180\Raised\Pressed\Orange.png" />
+    <Content Include="Images\scale-180\Raised\Pressed\Purple.png" />
+    <Content Include="Images\scale-180\Raised\Pressed\Red.png" />
+    <Content Include="Images\scale-180\Raised\Pressed\Yellow.png" />
+    <Content Include="Images\scale-240\Flat\Normal\Blue.png" />
+    <Content Include="Images\scale-240\Flat\Normal\Green.png" />
+    <Content Include="Images\scale-240\Flat\Normal\Orange.png" />
+    <Content Include="Images\scale-240\Flat\Normal\Purple.png" />
+    <Content Include="Images\scale-240\Flat\Normal\Red.png" />
+    <Content Include="Images\scale-240\Flat\Normal\Yellow.png" />
+    <Content Include="Images\scale-240\Flat\Pressed\Blue.png" />
+    <Content Include="Images\scale-240\Flat\Pressed\Green.png" />
+    <Content Include="Images\scale-240\Flat\Pressed\Orange.png" />
+    <Content Include="Images\scale-240\Flat\Pressed\Purple.png" />
+    <Content Include="Images\scale-240\Flat\Pressed\Red.png" />
+    <Content Include="Images\scale-240\Flat\Pressed\Yellow.png" />
+    <Content Include="Images\scale-240\Raised\Normal\Blue.png" />
+    <Content Include="Images\scale-240\Raised\Normal\Green.png" />
+    <Content Include="Images\scale-240\Raised\Normal\Orange.png" />
+    <Content Include="Images\scale-240\Raised\Normal\Purple.png" />
+    <Content Include="Images\scale-240\Raised\Normal\Red.png" />
+    <Content Include="Images\scale-240\Raised\Normal\Yellow.png" />
+    <Content Include="Images\scale-240\Raised\Pressed\Blue.png" />
+    <Content Include="Images\scale-240\Raised\Pressed\Green.png" />
+    <Content Include="Images\scale-240\Raised\Pressed\Orange.png" />
+    <Content Include="Images\scale-240\Raised\Pressed\Purple.png" />
+    <Content Include="Images\scale-240\Raised\Pressed\Red.png" />
+    <Content Include="Images\scale-240\Raised\Pressed\Yellow.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Sounds\Churchbell\Yellow.mp3" />
+    <Content Include="Sounds\Churchbell\Green.mp3" />
+    <Content Include="Sounds\Churchbell\Orange.mp3" />
+    <Content Include="Sounds\Churchbell\Purple.mp3" />
+    <Content Include="Sounds\Churchbell\Red.mp3" />
+    <Content Include="Sounds\Churchbell\Blue.mp3" />
+    <Content Include="Sounds\Meow\Blue.mp3" />
+    <Content Include="Sounds\Meow\Cat-meow-mp3.mp3" />
+    <Content Include="Sounds\Meow\Green.mp3" />
+    <Content Include="Sounds\Meow\Orange.mp3" />
+    <Content Include="Sounds\Meow\Purple.mp3" />
+    <Content Include="Sounds\Meow\Red.mp3" />
+    <Content Include="Sounds\Meow\Yellow.mp3" />
+    <Content Include="Sounds\Tone\Blue.mp3" />
+    <Content Include="Sounds\Tone\Green.mp3" />
+    <Content Include="Sounds\Tone\Orange.mp3" />
+    <Content Include="Sounds\Tone\Purple.mp3" />
+    <Content Include="Sounds\Tone\Red.mp3" />
+    <Content Include="Sounds\Tone\Yellow.mp3" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Advertising.Xaml, Version=10.0">
+      <Name>Microsoft Advertising SDK for XAML</Name>
+    </SDKReference>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\scale-100\Metallic\Normal\" />
+    <Folder Include="Images\scale-100\Metallic\Pressed\" />
+    <Folder Include="Images\scale-140\Metallic\Normal\" />
+    <Folder Include="Images\scale-140\Metallic\Pressed\" />
+    <Folder Include="Images\scale-180\Metallic\Normal\" />
+    <Folder Include="Images\scale-180\Metallic\Pressed\" />
+    <Folder Include="Images\scale-240\Metallic\Normal\" />
+    <Folder Include="Images\scale-240\Metallic\Pressed\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
-
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

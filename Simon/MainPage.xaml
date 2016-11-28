@@ -3,11 +3,143 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Simon"
+    xmlns:Triggers="using:Simon.CustomTriggers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
+    xmlns:custom="using:WinRTXamlToolkit.Controls"
+    mc:Ignorable="d" 
+    >
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.Content>
+                <Grid/>
+            </CommandBar.Content>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+            <AppBarButton x:Name="SoundPickerFlyout" Icon="Audio" Label="Change Sounds">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="SoundPicker" >
+                            <MenuFlyoutItem.Template>
+                                <ControlTemplate TargetType="MenuFlyoutItem">
+                                    <StackPanel Orientation="Vertical">
+                                        <RadioButton Content="Churchbell" Tag="Churchbell" Checked="SoundPicker_Checked" />
+                                        <RadioButton Content="Tone" Tag="Tone" Checked="SoundPicker_Checked" />
+                                        <RadioButton Content="Meow" Tag="Meow" Checked="SoundPicker_Checked" />
+                                    </StackPanel>
+                                </ControlTemplate>
+                            </MenuFlyoutItem.Template>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+
+
+            <AppBarButton x:Name="ImagePickerFlyout" Icon="Street" Label="Button Styles">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="ImagePicker" >
+                            <MenuFlyoutItem.Template>
+                                <ControlTemplate TargetType="MenuFlyoutItem">
+                                    <StackPanel Orientation="Vertical">
+                                        <RadioButton Content="Flat" Tag="Flat" Checked="ImagePicker_Checked" />
+                                        <RadioButton Content="Raised" Tag="Raised" Checked="ImagePicker_Checked" />
+                                        <RadioButton Content="Metallic" Tag="Metallic" Checked="ImagePicker_Checked" />
+                                    </StackPanel>
+                                </ControlTemplate>
+                            </MenuFlyoutItem.Template>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+
+            <AppBarButton Label="appbarbutton" Icon="Setting"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid x:Name="OuterFrame" Background="#FFCCCCFF" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False">
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TopMargin"/>
+            <RowDefinition x:Name="MiddleRow" Height="6*"/>
+            <RowDefinition x:Name="BottomMargin"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="LeftMargin"/>
+            <ColumnDefinition x:Name="MiddleColumn" Width="4*"/>
+            <ColumnDefinition x:Name="RightMargin"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="StateText" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Text="Portrait"  />
+        <Button x:Name="Hint" x:Uid="hint"   Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Hint" Grid.ColumnSpan="2" Click="Hint_Click">
+
+        </Button>
+        <Button x:Name="SixButtons" Content="Four Buttons" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" Click="SixButtons_Click" Grid.ColumnSpan="2" Width="45" Height="45"  />
+        <Image x:Name="Settings" Source="Assets/s0k6ayi3.bmp" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  />
+        <UI:AdControl ApplicationId = "3f83fe91-d6be-434d-a0ae-7351c5a997f1"  
+            AdUnitId = "10865270" HorizontalAlignment = "Center"  
+            VerticalAlignment = "Bottom" Grid.Row="2" Grid.Column="1"  Height="50" Width="320"/>
+           
+        <Grid x:Name="InnerFrame" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="TopButtons" />
+                <RowDefinition x:Name="MiddleButtons" />
+                <RowDefinition x:Name="BottomButtons" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftButtons"/>
+                <ColumnDefinition x:Name="RightButtons" />
+            </Grid.ColumnDefinitions>
+
+
+            <custom:ImageButton x:Name="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                NormalStateImageUriSource="Images/Raised/Normal/Red.png" 
+                                PressedStateImageUriSource="Images/Raised/Pressed/Red.png" Click="Button_Click" ClickMode="Press">
+                <MediaElement x:Name="buttonSound1" AutoPlay="False"></MediaElement>
+            </custom:ImageButton>
+
+            <custom:ImageButton x:Name="Blue" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Column="1"
+                                NormalStateImageUriSource="Images/Raised/Normal/Blue.png"  
+                                PressedStateImageUriSource="Images/Raised/Pressed/Blue.png" Click="Button_Click" ClickMode="Press">
+                <MediaElement x:Name="buttonSound2" AutoPlay="False"></MediaElement>
+            </custom:ImageButton>
+
+
+            <custom:ImageButton x:Name="Orange" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                NormalStateImageUriSource="Images/Raised/Normal/Orange.png" 
+                                PressedStateImageUriSource="Images/Raised/Pressed/Orange.png" Click="Button_Click" ClickMode="Press">
+                <MediaElement x:Name="buttonSound3" AutoPlay="False"></MediaElement>
+            </custom:ImageButton>
+
+
+            <custom:ImageButton x:Name="Purple" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                NormalStateImageUriSource="Images/Raised/Normal/Purple.png" 
+                                PressedStateImageUriSource="Images/Raised/Pressed/Purple.png" Click="Button_Click" ClickMode="Press">
+                <MediaElement x:Name="buttonSound4" AutoPlay="False"></MediaElement>
+            </custom:ImageButton>
+
+
+            <custom:ImageButton x:Name="Yellow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2"
+                                NormalStateImageUriSource="Images/Raised/Normal/Yellow.png" 
+                                PressedStateImageUriSource="Images/Raised/Pressed/Yellow.png" Click="Button_Click" ClickMode="Press">
+                <MediaElement x:Name="buttonSound5" AutoPlay="False"></MediaElement>
+            </custom:ImageButton>
+
+
+            <custom:ImageButton x:Name="Green" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                NormalStateImageUriSource="Images/Raised/Normal/Green.png" 
+                                PressedStateImageUriSource="Images/Raised/Pressed/Green.png" Click="Button_Click" ClickMode="Press">
+                <MediaElement x:Name="buttonSound6" AutoPlay="False"></MediaElement>
+            </custom:ImageButton>
+
+
+        </Grid>
     </Grid>
+
+
+
+
 </Page>
