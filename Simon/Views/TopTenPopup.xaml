@@ -1,0 +1,30 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Simon.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Simon="using:Simon"
+    x:Class="Simon.Views.TopTenPopup"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel Background="#FFCCCCFF" BorderBrush="#FFE01B1B" BorderThickness="8" CornerRadius="20">
+        <TextBlock Text="Name       Round       Level" Margin="20,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextAlignment="Center"/>
+        <ListView x:Name="listView" Margin="20" BorderBrush="#FFC91111" BorderThickness="4" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Name: "/>
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="Level: "/>
+                        <TextBlock Text="{Binding Level}"/>
+                        <TextBlock Text="Round: "/>
+                        <TextBlock Text="{Binding Round}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+</UserControl>

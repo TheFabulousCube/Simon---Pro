@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -44,6 +45,8 @@ namespace Simon
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
+
+
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -99,7 +102,13 @@ namespace Simon
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+
+        ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+            StorageFolder roamingFolder = ApplicationData.Current.RoamingFolder;
+            roamingSettings.Values["savedSound"] = MainPage.currentSound;
+            roamingSettings.Values["savedImage"] = MainPage.currentImage;
+           // roamingSettings.Values["TopTen"] = MainPage.topTen;
+            
             deferral.Complete();
         }
     }

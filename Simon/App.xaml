@@ -7,7 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ButtonStyle.xaml"/>
+                <ResourceDictionary Source="Assets/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="Assets/Legal.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

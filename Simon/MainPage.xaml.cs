@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simon.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Automation.Provider;
@@ -41,13 +44,21 @@ namespace Simon
         private int playerSequence = 0;
 
         // Visual Elements
-        public static string currentImage = "Raised";
-        public static string currentSound = "Tone";
+        public static string currentImage = "Flat";
+        public static string currentSound = "Churchbell";
+        public static ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+        public static ApplicationDataCompositeValue[] storedScore = new ApplicationDataCompositeValue()[];
+        StorageFolder roamingFolder = ApplicationData.Current.RoamingFolder;
+
 
         // Helper arrays
         List<ImageButton> allButtons;
         List<ImageButton> sequence;
         List<MediaElement> allSounds;
+
+        // Top Scores
+        TopScore thisScore;
+        public static IList<TopScore> topTen = new List<TopScore>();
 
         private bool AllButtons = false;
         private bool gameOver = false;
@@ -58,12 +69,28 @@ namespace Simon
             allButtons = new List<ImageButton> { Red, Blue, Green, Yellow, Orange, Purple };
             sequence = new List<ImageButton>();
             allSounds = new List<MediaElement> { buttonSound1, buttonSound2, buttonSound3, buttonSound4, buttonSound5, buttonSound6 };
+            if (roamingSettings != null)  LoadSettings();
             AdjustSounds(currentSound);
             AdjustImages(currentImage);
             AreYouReady();
             PopulateSoundPicker();
         } // end MainPage
 
+        private void LoadSettings()
+        {
+            currentSound = (roamingSettings.Values["savedSound"] != null) ? roamingSettings.Values["savedSound"].ToString() : currentSound;
+            currentImage = roamingSettings.Values["savedImage"] != null ? roamingSettings.Values["savedImage"].ToString() : currentImage;
+            if (roamingSettings.Values["topTen"] != null)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    // Top scores are stored as an array, storedScore
+                    // each score is comprised of name, round, & level
+                    storedScore[0]["name"] = topTen.N
+                }
+                topTen = roamingSettings.Values["topTen" + 2] as IList<TopScore>;
+            }
+        }
 
         private void PopulateSoundPicker()
         {
@@ -80,13 +107,19 @@ namespace Simon
             }
             /** Start Game **/
             if (!playerTurn) // Simon's Turn
-            {await Task.Delay(1000);
+            {
+                await Task.Delay(800); // give player a second to get ready
 
                 // disable all the buttons for Simon's Turn
                 foreach (ImageButton button in allButtons)
                 {
                     button.IsHitTestVisible = false;
                 }
+                Hint.IsHitTestVisible = false;
+                SixButtons.IsHitTestVisible = false;
+                ImagePickerFlyout.IsHitTestVisible = false;
+                SoundPickerFlyout.IsHitTestVisible = false;
+                Restart.IsHitTestVisible = false;
                 /** Pick a new button & add it to the sequence */
                 Random buttonSelected = new Random();
                 randNumber = buttonSelected.Next(0, numberOfButtons);
@@ -102,16 +135,22 @@ namespace Simon
                     button.HoverStateImageUriSource = button.PressedStateImageUriSource;
                     int place = allButtons.IndexOf(button);
                     Play_Sound(allSounds[place]);
-                    await Task.Delay(500);
+                    await Task.Delay(500); // length of simon's button click
                     button.NormalStateImageUriSource = temp;
                     button.HoverStateImageUriSource = temp;
+                    await Task.Delay(50); // time between buttons, you must seperate button clicks on same one twice!!
                 }
                 // re enable all the buttons for Player's Turn
                 foreach (ImageButton button in allButtons)
                 {
                     button.IsHitTestVisible = true;
                 }
-                
+                Hint.IsHitTestVisible = true;
+                SixButtons.IsHitTestVisible = true;
+                ImagePickerFlyout.IsHitTestVisible = true;
+                SoundPickerFlyout.IsHitTestVisible = true;
+                Restart.IsHitTestVisible = true;
+
                 playerTurn = true;
                 StateText.Text = "Your Turn";
             } // end Simon's turn
@@ -180,10 +219,8 @@ namespace Simon
             else
             {
                 StateText.Text = "Game Over";
-                sequence.Clear();
-                playerSequence = 0;
-
                 gameOver = true;
+                SimonsTurn();
 
             }
             if (playerSequence >= (sequence.Count()))
@@ -202,8 +239,10 @@ namespace Simon
         {
             currentSound = "Meow";
             AdjustSounds(currentSound);
-        } 
-        
+        }
+
+
+
         // Custom Dialogs
 
         private async void AreYouReady()
@@ -216,23 +255,49 @@ namespace Simon
             };
 
             await readyDialog.ShowAsync();
-                SimonsTurn();
+            
+            SimonsTurn();
 
-            }
+        }
 
         private async Task<bool> GameOver()
         {
+            string title = "Dang!  You were doing so well!";
+            // TODO check for high score, if so allow name entry
+            TopScore scoreToBeat = topTen.OrderBy(t => t.Round).ThenBy(t => t.Level).FirstOrDefault();
+            //TODO change formula. Override .equals??  count>sTB OR count=sTB and PS>sTB
+            
+
+            if (topTen.Count < 10)
+            {
+                title = "Hey! You got a high score!";
+                topTen.Add(new TopScore("My Name", sequence.Count, playerSequence));
+            }
+            else if ((sequence.Count > scoreToBeat.Round || (sequence.Count == scoreToBeat.Round && playerSequence > scoreToBeat.Level)))
+            {
+                // TODO add popup for name
+                title = "Hey! You got a high score!";
+                topTen.Add(new TopScore("My Name", sequence.Count, playerSequence));
+                topTen.Remove(scoreToBeat);
+            }
+
             ContentDialog gameOverDialog = new ContentDialog()
             {
-                Title = "Dang!  You were doing so well!",
-                Content = "Press OK to begin again. This is a CONTENT dialog",
-                PrimaryButtonText = "Start Over"
+                Title = title,
+                Content = "You got " + playerSequence + " right on Round " + sequence.Count + "!",
+                PrimaryButtonText = "Start Over",
+                SecondaryButtonText = "Not just now"
             };
+
 
             ContentDialogResult result = await gameOverDialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
+                sequence.Clear();
+                playerSequence = 0;
+                playerTurn = false;
                 gameOver = false;
+
                 return true;
             }
             return false;
@@ -251,8 +316,27 @@ namespace Simon
             currentImage = rb.Content.ToString();
             AdjustImages(currentImage);
         }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(About));
+        }
+
+        private void TopTen_Click(object sender, RoutedEventArgs e)
+        {
+            IList<TopScore> displayList = topTen;
+            displayList = displayList.OrderByDescending(l => l.Level).ThenByDescending(l => l.Round).Take(10).ToList();
+            listView.ItemsSource = displayList;
+            if (!TopTen.IsOpen) { TopTen.IsOpen = true; }
+        }
+
+        private void RestartGame(object sender, RoutedEventArgs e)
+        {
+            sequence.Clear();
+            playerSequence = 0;
+            playerTurn = false;
+            gameOver = false;
+            SimonsTurn();
+        }
     }
-
-
-
 }

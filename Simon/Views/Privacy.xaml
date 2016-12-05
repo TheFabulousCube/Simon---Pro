@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="Simon.Views.Privacy"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Simon.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+
+    </Page.Resources>
+    <ScrollViewer >
+        <StackPanel Background="#FF141414" BorderThickness="3" CornerRadius="15" BorderBrush="{ThemeResource ButtonBorderBrush}" MaxWidth="1080" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Back" BorderBrush="#FFF50F0F" Foreground="#FF2D3187" Click="Button_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <Button.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Square71x71Logo.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock Name="Title" VerticalAlignment="Top" Grid.Column="1" Style="{StaticResource LegalTitle}" Text="Privacy Policy" />
+            </Grid>
+
+            <TextBlock x:Name="GenInfo" Style="{StaticResource LegalHeading}"  HorizontalAlignment="Center">
+            This privacy policy governs your use of the software application Cube's Memory Game
+(“Application”) for Windows devices that was created by The Fabulous Cube. The application is a
+simple recreation of Milton Bradley's electronic 'Simon' game.
+            </TextBlock>
+
+            <TextBlock Text="Does the Application collect precise real time location information of the device?" Style="{StaticResource LegalHeading}"/>
+
+            <TextBlock Style="{StaticResource LegalDetails}" >
+                        Do third parties see and/or have access to information obtained by the Application?
+Only aggregated, anonymized data is periodically transmitted to external services to help us
+improve the Application and our service. We will share your information with third parties only in
+the ways that are described in this privacy statement.
+            </TextBlock>
+
+
+            <TextBlock x:Name="AppInfo" Text="What information does the Application obtain and how is it used?" Style="{StaticResource LegalHeading}"/>
+
+            <TextBlock Style="{StaticResource LegalDetails}"  >
+            "In addition, the Application may collect certain information automatically, including, but not
+limited to, the type of mobile device you use, your mobile devices unique device ID, the IP
+address of your mobile device, your mobile operating system, the type of mobile Internet browsers"
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+
+
+</Page>
