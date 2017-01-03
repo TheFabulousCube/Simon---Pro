@@ -9,6 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assets/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Assets/Legal.xaml"/>
+                <ResourceDictionary Source="Views/SoundPicker.xaml"/>
+                <!--<ResourceDictionary Source="Views/ButtonPicker.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,0 +1,51 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Simon">
+
+    <Style TargetType="MenuFlyoutItem" x:Key="SoundPicker">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                            <MenuFlyoutItem Text="SoundPicker" >
+                                <MenuFlyoutItem.Template>
+                                    <ControlTemplate TargetType="MenuFlyoutItem">
+                                        <StackPanel Orientation="Vertical">
+                                            <RadioButton Content="Churchbell" IsChecked="{Binding ChurchbellSounds, Mode=TwoWay}" />
+                                            <RadioButton Content="Tone" IsChecked="{Binding ToneSounds, Mode=TwoWay}" />
+                                            <RadioButton Content="Meow" IsChecked="{Binding MeowSounds, Mode=TwoWay}" />
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </MenuFlyoutItem.Template>
+                            </MenuFlyoutItem>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="MenuFlyoutItem" x:Key="ImagePicker">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    
+
+    <MenuFlyoutItem Text="ImagePicker" >
+        <MenuFlyoutItem.Template>
+            <ControlTemplate TargetType="MenuFlyoutItem">
+                <StackPanel Orientation="Vertical">
+                    <RadioButton Content="Flat" IsChecked="{Binding FlatButtons, Mode=TwoWay}" />
+                    <RadioButton Content="Raised" IsChecked="{Binding RaisedButtons, Mode=TwoWay}" />
+                    <RadioButton Content="Metallic" IsChecked="{Binding MetallicButtons, Mode=TwoWay}" />
+                </StackPanel>
+            </ControlTemplate>
+        </MenuFlyoutItem.Template>
+    </MenuFlyoutItem>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+ 
+
+</ResourceDictionary>
+

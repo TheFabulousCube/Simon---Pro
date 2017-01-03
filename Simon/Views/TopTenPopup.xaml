@@ -11,17 +11,21 @@
     d:DesignWidth="400">
 
     <StackPanel Background="#FFCCCCFF" BorderBrush="#FFE01B1B" BorderThickness="8" CornerRadius="20">
-        <TextBlock Text="Name       Round       Level" Margin="20,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextAlignment="Center"/>
+        <TextBlock Text="Name       Round       Level   #Buttons   Device" Margin="20,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" TextAlignment="Center"/>
         <ListView x:Name="listView" Margin="20" BorderBrush="#FFC91111" BorderThickness="4" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Name: "/>
+                        <TextBlock Text="N: "/>
                         <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="Level: "/>
+                        <TextBlock Text="L: "/>
                         <TextBlock Text="{Binding Level}"/>
-                        <TextBlock Text="Round: "/>
+                        <TextBlock Text="R: "/>
                         <TextBlock Text="{Binding Round}"/>
+                        <TextBlock Text="#B: "/>
+                        <TextBlock Text="{Binding Buttons}"/>
+                        <TextBlock Text="D: "/>
+                        <TextBlock Text="{Binding Device}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

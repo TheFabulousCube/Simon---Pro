@@ -19,10 +19,16 @@ namespace Simon.Views
 {
     public sealed partial class TopTenPopup : UserControl
     {
-        public TopTenPopup()
+        public TopTenPopup(IList<TopScoreEntity> displayList)
         {
             this.InitializeComponent();
-            IList<TopScore> displayList = MainPage.topTen;
+
+            displayList = displayList.OrderByDescending(l => l.Level).ThenByDescending(l => l.Round).ToList();
+            listView.ItemsSource = displayList;
+        }
+        public TopTenPopup(IList<TopScore> displayList )
+        {
+            this.InitializeComponent();
 
             displayList = displayList.OrderByDescending(l => l.Level).ThenByDescending(l => l.Round).ToList();
             listView.ItemsSource = displayList;

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="a8c815ab-7043-4c4e-bc23-f6e3f9f88818" Publisher="CN=Cube" Version="1.0.0.0" />
+  <Identity Name="6455TheFabulousCube.SimonMemoryGame-Pro" Publisher="CN=4CAC0EA7-8A70-4466-A9CC-4112DC8EBB6B" Version="12.2.2.0" />
   <mp:PhoneIdentity PhoneProductId="a8c815ab-7043-4c4e-bc23-f6e3f9f88818" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Simon</DisplayName>
-    <PublisherDisplayName>Cube</PublisherDisplayName>
+    <DisplayName>Simon Memory Game - Pro</DisplayName>
+    <PublisherDisplayName>The Fabulous Cube</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Simon.App">
-      <uap:VisualElements DisplayName="Simon" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Simon" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Simon Memory Game - Pro" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Simon" BackgroundColor="transparent">
+        <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" ShortName="Simon" Square310x310Logo="Assets\Square310x310Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />

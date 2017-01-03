@@ -117,34 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="4_buttons" xml:space="preserve">
-    <value>4 Buttons</value>
+  <data name="Buttons" xml:space="preserve">
+    <value>Buttons</value>
+    <comment>Displayed on the # of Buttons button</comment>
   </data>
-  <data name="6_buttons" xml:space="preserve">
-    <value>6 buttons</value>
-  </data>
-  <data name="gameover" xml:space="preserve">
+  <data name="Gameover" xml:space="preserve">
     <value>Game Over</value>
+    <comment>State.Text for Gameover</comment>
   </data>
-  <data name="hint" xml:space="preserve">
-    <value>Hint</value>
+  <data name="Hints" xml:space="preserve">
+    <value>Hints</value>
+    <comment>Displayed on the Hints button</comment>
   </data>
   <data name="playersturn" xml:space="preserve">
     <value>Your Turn</value>
-  </data>
-  <data name="restartPlayer" xml:space="preserve">
-    <value>Hold on, start over</value>
-  </data>
-  <data name="restartSimon" xml:space="preserve">
-    <value>Restarting . . .</value>
+    <comment>State.Text for Player's Turn</comment>
   </data>
   <data name="simonsturn" xml:space="preserve">
     <value>Simon's Turn</value>
+    <comment>State.Text for Simon's Turn</comment>
   </data>
   <data name="start" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="top" xml:space="preserve">
     <value>From the top:</value>
+  </data>
+  <data name="top100" xml:space="preserve">
+    <value>Top 100</value>
+    <comment>Menu Item</comment>
+  </data>
+  <data name="topten.Label" xml:space="preserve">
+    <value>Top Ten (Local)</value>
+    <comment>AppBarButton</comment>
+  </data>
+  <data name="topten.Text" xml:space="preserve">
+    <value>Top Ten (Local)</value>
+    <comment>Menu Item</comment>
   </data>
 </root>

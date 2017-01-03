@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page xmlns:my="using:Simon" 
     x:Class="Simon.Views.Privacy"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,48 +9,44 @@
     <Page.Resources>
 
     </Page.Resources>
-    <ScrollViewer >
-        <StackPanel Background="#FF141414" BorderThickness="3" CornerRadius="15" BorderBrush="{ThemeResource ButtonBorderBrush}" MaxWidth="1080" ScrollViewer.VerticalScrollBarVisibility="Auto">
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Content="Back" BorderBrush="#FFF50F0F" Foreground="#FF2D3187" Click="Button_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                    <Button.Background>
-                        <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Square71x71Logo.png"/>
-                    </Button.Background>
-                </Button>
-                <TextBlock Name="Title" VerticalAlignment="Top" Grid.Column="1" Style="{StaticResource LegalTitle}" Text="Privacy Policy" />
-            </Grid>
+    <RelativePanel Background="#FF141414" BorderThickness="3" CornerRadius="15"  MaxWidth="1080">
 
-            <TextBlock x:Name="GenInfo" Style="{StaticResource LegalHeading}"  HorizontalAlignment="Center">
+        <TextBlock Name="Title" VerticalAlignment="Top" Style="{StaticResource LegalTitle}" Text="Privacy Policy" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Foreground="White" />
+        <my:MyBackButton RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" Width="48" Height="48" />
+
+
+
+        <my:HomeButton Padding="0" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" />
+        <TextBlock x:Name="GenInfo" Style="{StaticResource LegalHeading}"  HorizontalAlignment="Center" TextAlignment="Center"  RelativePanel.Below="Title">
             This privacy policy governs your use of the software application Cube's Memory Game
 (“Application”) for Windows devices that was created by The Fabulous Cube. The application is a
 simple recreation of Milton Bradley's electronic 'Simon' game.
-            </TextBlock>
-
-            <TextBlock Text="Does the Application collect precise real time location information of the device?" Style="{StaticResource LegalHeading}"/>
-
-            <TextBlock Style="{StaticResource LegalDetails}" >
-                        Do third parties see and/or have access to information obtained by the Application?
-Only aggregated, anonymized data is periodically transmitted to external services to help us
-improve the Application and our service. We will share your information with third parties only in
-the ways that are described in this privacy statement.
-            </TextBlock>
+        </TextBlock>
+        <ScrollViewer RelativePanel.Below="GenInfo" >
+            <RelativePanel>
 
 
-            <TextBlock x:Name="AppInfo" Text="What information does the Application obtain and how is it used?" Style="{StaticResource LegalHeading}"/>
+                <TextBlock x:Name="AppInfoQ" Text="What information does the Application obtain and how is it used?" Style="{StaticResource LegalHeading}" RelativePanel.AlignTopWithPanel="True"/>
 
-            <TextBlock Style="{StaticResource LegalDetails}"  >
-            "In addition, the Application may collect certain information automatically, including, but not
-limited to, the type of mobile device you use, your mobile devices unique device ID, the IP
-address of your mobile device, your mobile operating system, the type of mobile Internet browsers"
-            </TextBlock>
-        </StackPanel>
-    </ScrollViewer>
+                <TextBlock x:Name="AppInfoA" Style="{StaticResource LegalDetails}" RelativePanel.Below="AppInfoQ"  >
+                <Run Text="     Your game settings and top 10 scores are stored in appData/Roaming.  This is to provide a consistant user experience across all of your devices.  This information is available to any device signed into your Microsoft account and is as vulnerable as any other data stored in appData/Roaming."/><LineBreak/>
+                <Run Text="     The top 100 scores is a composite of top scores from all devices that have installed the Pro version of the app. You must have the Pro version to save scores to the Top 100.  Any name of your choosing, the higest round you were on, the number of correct guesses on that round, the number of buttons, and what kind of device you were using (Windows.Mobile, Windows.Desktop, Android, etc.) when you saved the top 100 score are saved to a database stored online.  That's it."/><LineBreak/>
+                <Run Text="     None of your personal or personally identifying information is saved or stored anywhere by this application. (Unless you store such information as your name and store it as a Top 100 score. Don't do that. Don't use ugly words, either. The list is monitored and vulger, profane, personally identifying, or slanderous names will be removed."/>
+                </TextBlock>
+
+
+
+                <TextBlock x:Name="LocationQ" Text="Does the Application collect precise real time location information of the device?" Style="{StaticResource LegalHeading}" Grid.Row="2" RelativePanel.Below="AppInfoA"/>
+                <TextBlock x:Name="LocationA" Style="{StaticResource LegalDetails}"  Text="Nope." Grid.Row="3" RelativePanel.Below="LocationQ" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+                <TextBlock x:Name="ThirdQ" Text="Do third parties see and/or have access to information obtained by the Application?" Style="{StaticResource LegalHeading}" Grid.Row="4" RelativePanel.Below="LocationA"/>
+                <TextBlock x:Name="ThirdA" Style="{StaticResource LegalDetails}"  Grid.Row="5" RelativePanel.Below="ThirdQ">
+            <Run Text="The Top 100 scores are saved to an online database, currently Microsoft Azure. That's pretty secure. You also provided either your Microsoft Account or Google Play account when you downloaded this application. I can't control what they ask for or do with the information they collect."/>
+                </TextBlock>
+            </RelativePanel>
+        </ScrollViewer>
+    </RelativePanel>
 
 
 </Page>

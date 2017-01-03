@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,7 +14,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Simon.Views;
+using Simon;
 using Windows.System.Profile;
+using Windows.UI.Core;
+using Windows.System;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,6 +31,11 @@ namespace Simon.Views
         public About()
         {
             this.InitializeComponent();
+            if (Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported())
+            {
+                this.feedbackButton.Visibility = Visibility.Visible;
+            }
+
             var deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
             var deviceVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
             var version = ulong.Parse(deviceVersion);
@@ -47,10 +56,36 @@ namespace Simon.Views
         {
             this.Frame.Navigate(typeof(Privacy));
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void rateThisAppButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage));
+            await Launcher.LaunchUriAsync(
+    new Uri($"ms-windows-store://review/?PFN={Package.Current.Id.FamilyName}"));
+        }
+
+        private async void feedbackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+            await launcher.LaunchAsync();
+        }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                // Show UI in title bar if opted-in and in-app backstack is not empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Visible;
+            }
+            else
+            {
+                // Remove the UI from the title bar if in-app back stack is empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Collapsed;
+            }
         }
     }
+
 }

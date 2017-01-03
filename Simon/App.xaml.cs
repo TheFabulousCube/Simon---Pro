@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,6 +26,9 @@ namespace Simon
     /// </summary>
     sealed partial class App : Application
     {
+        public static StorageCredentials credentials = new StorageCredentials("cubesmemorygame", "hLP71eYU9PlTwy018IxifktJMu+3jjTLiYVCIKTK6gPGMwaDZkdb3M1zpNTO6JKjlpET5S6+vMXFliw8iTYjPw==");
+        public static CloudStorageAccount account = new CloudStorageAccount(credentials, false);
+        public static string tableName = "Top100", contianerName = "pictures";
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -49,7 +55,12 @@ namespace Simon
 
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
+            /*******************************************************************************/
+            /******  Back Button  **********************************************************/
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested +=
+    App_BackRequested;
 
+            /********************************************************************************/
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -81,6 +92,21 @@ namespace Simon
                 Window.Current.Activate();
             }
         }
+        private void App_BackRequested(object sender,
+    Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+                return;
+
+            // Navigate back if possible, and if the event has not 
+            // already been handled .
+            if (rootFrame.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails
@@ -105,10 +131,11 @@ namespace Simon
 
         ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
             StorageFolder roamingFolder = ApplicationData.Current.RoamingFolder;
-            roamingSettings.Values["savedSound"] = MainPage.currentSound;
-            roamingSettings.Values["savedImage"] = MainPage.currentImage;
-           // roamingSettings.Values["TopTen"] = MainPage.topTen;
-            
+            //roamingSettings.Values["savedSound"] = MainPage.currentSound;
+            //roamingSettings.Values["savedImage"] = MainPage.currentImage;
+            //roamingSettings.Values["savedName"] = MainPage.name;
+            // roamingSettings.Values["TopTen"] = MainPage.topTen;
+
             deferral.Complete();
         }
     }
